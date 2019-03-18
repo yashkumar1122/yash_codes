@@ -14,8 +14,14 @@ def _cpp_compile(srcpath, outpath):
     subprocess.call(cmd)
     return outpath
 
+def _java_compile(srcpath, outpath):
+    cmd = ['javac', '-d', 'bin'] + sys.argv[2:] + [srcpath]
+    print(' '.join(cmd))
+    subprocess.call(cmd)
+    return 'bin/Main.class'
 
-FILE_MAPPING = {'.cpp': _cpp_compile}
+
+FILE_MAPPING = {'.cpp': _cpp_compile,'.java': _java_compile}
 
 
 def main():
@@ -30,11 +36,9 @@ def main():
 
     filename, ext = os.path.splitext(sys.argv[1])
     binary = os.path.join(bin_dir, filename)
-    if os.name == 'nt':
-        binary = binary + '.exe'
 
-    if os.path.isfile(binary):
-        os.remove(binary)
+    if os.path.isfile('bin/Main.class'):
+        os.remove('bin/Main.class')
 
     if ext not in FILE_MAPPING:
         print('unknown file type', ext)
@@ -57,9 +61,9 @@ def main():
         out_file = os.path.join(bin_dir, test + '.output')
         if os.path.isfile(out_file):
             os.remove(out_file)
-
+        print(binary)
         subprocess.run(
-            '{} < {} > {}'.format(binary, in_file, out_file),
+            'java -cp bin Main < {} > {}'.format(in_file, out_file),
             shell=True,
             check=True)
 
