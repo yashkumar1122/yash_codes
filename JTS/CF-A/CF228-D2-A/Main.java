@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.Arrays;
+import java.util.*;
 
 //    Date : 2019-03-19
 //  Author : Yash Kumar
