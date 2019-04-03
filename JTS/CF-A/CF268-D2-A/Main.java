@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
 //    Date : 2019-04-03
@@ -10,20 +11,22 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
+        HashMap<Integer, Integer> hm = new HashMap<>();
 
         int[] home = new int[n];
-        int[] away = new int[n];
 
-        for(int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             home[i] = sc.nextInt();
-            away[i] = sc.nextInt();
+            int guest = sc.nextInt();
+            if (hm.containsKey(guest))
+                hm.put(guest, hm.get(guest) + 1);
+            else
+                hm.put(guest, 1);
         }
         int count = 0;
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < n; j++)
-                if(home[i] == away[j])
-                    count++;
-        }
+        for (int h : home)
+            if (hm.containsKey(h))
+                count += hm.get(h);
         System.out.println(count);
     }
 }
