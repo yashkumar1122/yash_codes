@@ -10,20 +10,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int h = sc.nextInt();
-        int width = 1;
-        int sum = 0;
-        int[] ary = new int[n];
+        int width = n;
 
         for (int i = 0; i < n; i++) {
-            ary[i] = sc.nextInt();
-
-            if (ary[i] > h) {
-                ary[i] = width + 1;
-                sum += ary[i];
-            } else {
-                sum = sum + width;
-            }
+            if(sc.nextInt() > h)
+                width++;
         }
-        System.out.println(sum);
+        System.out.println(width);
     }
 }
