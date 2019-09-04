@@ -16,7 +16,6 @@ public class Main {
         }
 
         int left = 0, right = n - 1;
-        boolean flag = true;
         int seraja = 0, dima = 0;
         while (left <= right) {
             if (ary[left] >= ary[right]) {
